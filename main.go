@@ -15,19 +15,22 @@ var appletTbl map[string]funcSym = map[string]funcSym{
 }
 
 func main() {
-	defer usage()
+	defer panicException()
 	if len(os.Args) < 2 {
-		panic("Oops")
+		panic(nil)
 	}
 
 	appletTbl[os.Args[1]](os.Args[2:])
 }
 
-func usage() {
-	if err := recover(); err != nil {
+func panicException() {
+	err := recover()
+	if err == nil {
 		fmt.Print(
 			"usage: tinybox-go <applets>\n\n",
 			"- applets\n",
 			"    cat\n")
+	} else {
+		fmt.Println(err)
 	}
 }
