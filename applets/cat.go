@@ -10,14 +10,16 @@ func CatMain(args []string) int {
 	for _, fname := range args {
 		fp, err := os.Open(fname)
 		if err != nil {
-			os.Stderr.WriteString(err.Error())
+			os.Stderr.WriteString(err.Error() + "\n")
 			continue
 		}
 
+	routine:
 		for {
 			n, err := fp.Read(rdbuf)
 			if err != nil {
-				panic(err)
+				os.Stderr.WriteString(err.Error() + "\n")
+				break routine
 			}
 			os.Stdout.Write(rdbuf[:n])
 
