@@ -12,6 +12,7 @@ type funcSym func(args []string) int
 // TODO: how to kill the warn?
 var appletTbl map[string]funcSym = map[string]funcSym{
 	"cat": applets.CatMain,
+	"ls":  applets.LsMain,
 }
 
 func main() {
@@ -33,6 +34,6 @@ func panicException() {
 		fmt.Print(
 			"usage: tinybox-go <applets>\n\n",
 			"- applets\n",
-			"    cat\n")
+			"    cat ls\n")
 	}
 }
