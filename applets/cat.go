@@ -10,7 +10,8 @@ func CatMain(args []string) int {
 	for _, fname := range args {
 		fp, err := os.Open(fname)
 		if err != nil {
-			panic(err)
+			os.Stderr.WriteString(err.Error())
+			continue
 		}
 
 		for {
